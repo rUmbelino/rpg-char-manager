@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 
 type ItemProps = {
   width: string;
@@ -13,12 +12,13 @@ export const Item: React.FC<ItemProps> = ({
   children,
   style,
 }): JSX.Element => {
-  const Box = styled.div`
-    border: 1px solid black;
-    margin: 0.5rem;
-    width: ${width};
-    height: ${height};
-  `;
+  const customStyle = {
+    border: '1px solid black',
+    margin: '0.5rem',
+    width,
+    height,
+    ...style,
+  };
 
-  return <Box style={style}>{children}</Box>;
+  return <div style={customStyle}>{children}</div>;
 };
