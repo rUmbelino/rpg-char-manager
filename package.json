@@ -46,7 +46,7 @@
   "devDependencies": {
     "@types/enzyme": "^3.10.8",
     "@types/enzyme-adapter-react-15": "^1.0.6",
-    "@types/styled-components": "^5.1.7",
+    "@types/styled-components": "^5.1.14",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-15": "^1.4.3"
   }
