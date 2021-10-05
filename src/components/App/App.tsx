@@ -1,11 +1,13 @@
-import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { ItemsProvider } from '../hocks/Items';
 import { CharacterPage } from '../../pages/character';
 
 function App() {
   return (
     <div className="App container">
-      <CharacterPage />
+      <ItemsProvider>
+        <CharacterPage />
+      </ItemsProvider>
     </div>
   );
 }
