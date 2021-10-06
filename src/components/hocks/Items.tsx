@@ -1,31 +1,30 @@
 import React, { createContext, useContext, useState } from 'react';
-import { Item } from '../../@types/Item';
-import { getItemsFromStorage } from '../../utils/itemStorage';
+import { Equipment } from '../../@types/Item';
 import { NIE } from '../../utils/NIE';
 
-interface ItemsContextType {
-  items: Item[];
-  setItems: (items: Item[]) => void;
+interface EquipmentsContextType {
+  equipments: Equipment[];
+  setEquipments: (equipments: Equipment[]) => void;
 }
 
-const ItemsContext = createContext<ItemsContextType>({
-  items: [],
-  setItems: NIE,
+const EquipmentssContext = createContext<EquipmentsContextType>({
+  equipments: [],
+  setEquipments: NIE,
 });
 
 export const ItemsProvider: React.FC = ({ children }) => {
-  const [items, setItems] = useState<Item[]>(getItemsFromStorage());
+  const [equipments, setEquipments] = useState<Equipment[]>([]);
 
   return (
-    <ItemsContext.Provider
+    <EquipmentssContext.Provider
       value={{
-        items,
-        setItems,
+        equipments,
+        setEquipments,
       }}
     >
       {children}
-    </ItemsContext.Provider>
+    </EquipmentssContext.Provider>
   );
 };
 
-export const useItemsContext = () => useContext(ItemsContext);
+export const useEquipmentssContext = () => useContext(EquipmentssContext);

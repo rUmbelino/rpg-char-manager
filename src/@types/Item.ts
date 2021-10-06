@@ -1,4 +1,5 @@
-export interface Item {
+export interface Equipment {
+  index: string;
   name: string;
   url: string;
 }
