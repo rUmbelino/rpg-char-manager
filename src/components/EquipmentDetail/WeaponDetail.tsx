@@ -3,6 +3,7 @@ import { Weapon } from '../../@types/D&D';
 import { getRangeDescription } from '../../utils/getRangeDescription';
 import { ActionButtons, ActionButtonTypes } from './ActionButtons';
 import { EquipmentLine } from './EquipmentLine';
+import { WeaponProperties } from './WeaponProperties';
 
 interface WeaponDetailProps {
   weapon: Weapon;
@@ -47,6 +48,7 @@ export const WeaponDetail: React.FC<WeaponDetailProps> = ({
           </tr>
         </thead>
         <tbody>
+          <EquipmentLine name="Index" description={index} />
           <EquipmentLine name="Range" description={category_range} />
           <EquipmentLine
             name="Cost"
@@ -77,15 +79,7 @@ export const WeaponDetail: React.FC<WeaponDetailProps> = ({
               description={getRangeDescription(throw_range)}
             />
           )}
-          {properties.map(({ name, index }, i) => {
-            return (
-              <EquipmentLine
-                key={index}
-                name={`Property ${i}`}
-                description={name}
-              />
-            );
-          })}
+          <WeaponProperties equipments={properties} />
         </tbody>
       </Table>
       <ActionButtons

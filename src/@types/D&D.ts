@@ -14,6 +14,10 @@ export interface Damage {
   damage_type: Equipment;
 }
 
+export interface EquipmentProperty extends Equipment {
+  desc: string[];
+}
+
 export interface Weapon {
   index: string;
   name: string;

@@ -20,8 +20,8 @@ export const EquipmentModal: React.FC<EquipmentModalProps> = ({
   const [equipmentDetail, setEquipmentDetail] = useState<{}>();
 
   useEffect(() => {
-    fetchEquipmentDetail(equipment.index).then(setEquipmentDetail);
-  }, [equipment.index]);
+    fetchEquipmentDetail(equipment.url).then(setEquipmentDetail);
+  }, [equipment.url]);
 
   return (
     <Modal show handleClose={handleClose}>

@@ -1,9 +1,19 @@
-import { Weapon } from '../../@types/D&D';
+import { EquipmentProperty, Weapon } from '../../@types/D&D';
 import { axios } from '../../utils/axios';
 
-export const fetchEquipmentDetail = async (index: string) => {
+export const fetchEquipmentDetail = async (url: string) => {
   try {
-    const { data } = await axios.get<Weapon>(`/equipment/${index}`);
+    const { data } = await axios.get<Weapon>(url);
+
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchEquipmentProperty = async (url: string) => {
+  try {
+    const { data } = await axios.get<EquipmentProperty>(url);
 
     return data;
   } catch (error) {

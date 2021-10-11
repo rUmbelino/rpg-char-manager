@@ -12,7 +12,7 @@ export const ItemsList = (): JSX.Element => {
 
   return (
     <div style={style}>
-      <Accordion defaultActiveKey="0" flush>
+      <Accordion flush>
         <Accordion.Item eventKey="0">
           <Accordion.Header>Weapons</Accordion.Header>
           <Accordion.Body className="p-0">
