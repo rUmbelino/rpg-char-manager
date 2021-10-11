@@ -52,34 +52,38 @@ export const WeaponDetail: React.FC<WeaponDetailProps> = ({
           <EquipmentLine name="Range" description={category_range} />
           <EquipmentLine
             name="Cost"
-            description={`${cost.quantity} ${cost.unit}`}
+            description={`${cost?.quantity} ${cost?.unit}`}
           />
           <EquipmentLine name="Weight" description={weight} />
-          <EquipmentLine
-            name="Damage"
-            description={`${damage?.damage_dice} (${damage.damage_type.name})`}
-          />
+          {damage && (
+            <EquipmentLine
+              name="Damage"
+              description={`${damage?.damage_dice} (${damage?.damage_type.name})`}
+            />
+          )}
           {two_handed_damage && (
             <EquipmentLine
               name="Two Handed Damage"
-              description={`${two_handed_damage?.damage_dice} (${two_handed_damage.damage_type.name})`}
+              description={`${two_handed_damage?.damage_dice} (${two_handed_damage?.damage_type.name})`}
             />
           )}
           <EquipmentLine
             name="Category"
-            description={equipment_category.name}
+            description={equipment_category?.name}
           />
-          <EquipmentLine
-            name="Range"
-            description={getRangeDescription(range)}
-          />
+          {range && (
+            <EquipmentLine
+              name="Range"
+              description={getRangeDescription(range)}
+            />
+          )}
           {throw_range && (
             <EquipmentLine
               name="Thrown Range"
               description={getRangeDescription(throw_range)}
             />
           )}
-          <WeaponProperties equipments={properties} />
+          {properties && <WeaponProperties equipments={properties} />}
         </tbody>
       </Table>
       <ActionButtons
