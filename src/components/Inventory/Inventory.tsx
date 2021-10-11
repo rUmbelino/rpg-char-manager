@@ -1,10 +1,27 @@
-export const Inventory = () => {
-  const style = {
-    border: '1px solid black',
-    margin: '0.5rem',
-    width: '100%',
-    height: '200px',
-  };
+import { useInventoryContext } from '../hocks/Inventory';
+import { Item } from '../Item';
+import { Thumbnail } from '../Item/Thumbnail';
 
-  return <div style={style}>Inventory</div>;
+export const Inventory = () => {
+  const { equipments } = useInventoryContext();
+
+  return (
+    <div className="d-flex flex-wrap w-100 border border-dark">
+      {Array(10)
+        .fill('')
+        .map((curr, index) => {
+          const equipment = equipments[index];
+
+          return (
+            <Item
+              key={`inventory_item_${index}`}
+              height="80px"
+              style={{ flex: '1 0 calc(20% - 20px)' }}
+            >
+              {equipment && <Thumbnail equipment={equipment} />}
+            </Item>
+          );
+        })}
+    </div>
+  );
 };

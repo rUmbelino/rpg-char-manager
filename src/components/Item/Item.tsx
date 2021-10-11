@@ -1,14 +1,14 @@
 import React from 'react';
 
 type ItemProps = {
-  width: string;
-  height: string;
+  width?: string;
+  height?: string;
   style?: {};
 };
 
 export const Item: React.FC<ItemProps> = ({
-  width,
-  height,
+  width = '',
+  height = '',
   children,
   style,
 }): JSX.Element => {

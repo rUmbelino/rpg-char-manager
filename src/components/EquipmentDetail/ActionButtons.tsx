@@ -1,18 +1,26 @@
 import { Button } from 'react-bootstrap';
+import { Equipment } from '../../@types/D&D';
+import { useInventoryContext } from '../hocks/Inventory';
 
 export enum ActionButtonTypes {
+  ITENS_LIST,
   INVENTORY,
 }
 
 interface ActionButtonsProps {
   actionButtons: ActionButtonTypes;
   handleClose: () => void;
+  equipment: Equipment;
 }
 
 export const ActionButtons: React.FC<ActionButtonsProps> = ({
   actionButtons,
   handleClose,
+  equipment,
 }) => {
+  const { addEquipmentToInventory, removeEquipmentFromInventory } =
+    useInventoryContext();
+
   const cancelButton = {
     description: 'Cancel',
     variant: 'secondary',
@@ -22,7 +30,19 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
   const addToInventory = {
     description: 'Add to inventory',
     variant: 'primary',
-    callback: handleClose,
+    callback: () => {
+      addEquipmentToInventory(equipment);
+      handleClose();
+    },
+  };
+
+  const removeFromInventory = {
+    description: 'Remove from inventory',
+    variant: 'danger',
+    callback: () => {
+      removeEquipmentFromInventory(equipment.index);
+      handleClose();
+    },
   };
 
   const equip = {
@@ -32,7 +52,8 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
   };
 
   const buttons = {
-    [ActionButtonTypes.INVENTORY]: [cancelButton, addToInventory, equip],
+    [ActionButtonTypes.ITENS_LIST]: [cancelButton, addToInventory, equip],
+    [ActionButtonTypes.INVENTORY]: [cancelButton, removeFromInventory],
   };
 
   const selectedButtons = buttons[actionButtons];

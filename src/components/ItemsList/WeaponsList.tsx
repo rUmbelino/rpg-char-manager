@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { ListGroup } from 'react-bootstrap';
+import { Equipment } from '../../@types/D&D';
 import { EquipmentModal } from '../EquipmentDetail';
+import { ActionButtonTypes } from '../EquipmentDetail/ActionButtons';
 import { useEquipmentsContext } from '../hocks/Items';
 import { fetchItems } from './controller';
 
 export const WeaponsList = (): JSX.Element => {
   const { weapons, setWeapons } = useEquipmentsContext();
-  const [equipmentDetail, setEquipmentDetail] = useState('');
+  const [equipment, setEquipment] = useState<Equipment>();
 
   const fetchEquipmentsOnLoad = useRef(() => {
     if (weapons.length === 0) {
@@ -20,18 +22,24 @@ export const WeaponsList = (): JSX.Element => {
 
   return (
     <div>
-      {equipmentDetail && (
+      {equipment && (
         <EquipmentModal
-          index={equipmentDetail}
-          handleClose={() => setEquipmentDetail('')}
+          equipment={equipment}
+          handleClose={() => setEquipment(undefined)}
+          actionButtons={ActionButtonTypes.ITENS_LIST}
         />
       )}
       <ListGroup>
-        {weapons.map(({ name, index }) => (
-          <ListGroup.Item key={name} onClick={() => setEquipmentDetail(index)}>
-            {name}
-          </ListGroup.Item>
-        ))}
+        {weapons.map((equipment) => {
+          return (
+            <ListGroup.Item
+              key={`weapon_list_${equipment.name}`}
+              onClick={() => setEquipment(equipment)}
+            >
+              {equipment.name}
+            </ListGroup.Item>
+          );
+        })}
       </ListGroup>
     </div>
   );

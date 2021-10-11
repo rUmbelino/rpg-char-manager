@@ -16,6 +16,7 @@ export const WeaponDetail: React.FC<WeaponDetailProps> = ({
   handleClose,
 }) => {
   const {
+    index,
     name,
     weight,
     category_range,
@@ -26,7 +27,14 @@ export const WeaponDetail: React.FC<WeaponDetailProps> = ({
     properties,
     range,
     throw_range,
+    url,
   } = weapon;
+
+  const equipment = {
+    index,
+    name,
+    url,
+  };
 
   return (
     <div>
@@ -80,7 +88,11 @@ export const WeaponDetail: React.FC<WeaponDetailProps> = ({
           })}
         </tbody>
       </Table>
-      <ActionButtons actionButtons={actionButtons} handleClose={handleClose} />
+      <ActionButtons
+        actionButtons={actionButtons}
+        handleClose={handleClose}
+        equipment={equipment}
+      />
     </div>
   );
 };

@@ -1,37 +1,39 @@
 import { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
-import { Weapon } from '../../@types/D&D';
+import { Equipment, Weapon } from '../../@types/D&D';
 import { Modal } from '../Modal';
 import { ActionButtonTypes } from './ActionButtons';
 import { fetchEquipmentDetail } from './controller';
 import { WeaponDetail } from './WeaponDetail';
 
 interface EquipmentModalProps {
-  index: string;
+  equipment: Equipment;
   handleClose: () => void;
+  actionButtons: ActionButtonTypes;
 }
 
 export const EquipmentModal: React.FC<EquipmentModalProps> = ({
-  index,
+  equipment,
   handleClose,
+  actionButtons,
 }) => {
-  const [equipment, setEquipment] = useState<{}>();
+  const [equipmentDetail, setEquipmentDetail] = useState<{}>();
 
   useEffect(() => {
-    fetchEquipmentDetail(index).then(setEquipment);
-  }, [index]);
+    fetchEquipmentDetail(equipment.index).then(setEquipmentDetail);
+  }, [equipment.index]);
 
   return (
     <Modal show handleClose={handleClose}>
-      {!equipment && (
+      {!equipmentDetail && (
         <div className="text-center">
           <Spinner animation="border" />
         </div>
       )}
-      {equipment && (
+      {equipmentDetail && (
         <WeaponDetail
-          weapon={equipment as Weapon}
-          actionButtons={ActionButtonTypes.INVENTORY}
+          weapon={equipmentDetail as Weapon}
+          actionButtons={actionButtons}
           handleClose={handleClose}
         />
       )}
