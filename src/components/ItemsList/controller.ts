@@ -8,11 +8,9 @@ interface EquipmentResponse {
   url: string;
 }
 
-interface FetchItemsParams {
-  setEquipments: (equipments: Equipment[]) => void;
-}
+type EquipmentSetter = (equipments: Equipment[]) => void;
 
-export const fetchItems = async ({ setEquipments }: FetchItemsParams) => {
+export const fetchItems = async (setEquipments: EquipmentSetter) => {
   try {
     const { data } = await axios.get<EquipmentResponse>(
       '/equipment-categories/weapon'

@@ -3,23 +3,23 @@ import { Equipment } from '../../@types/D&D';
 import { NIE } from '../../utils/NIE';
 
 interface EquipmentsContextType {
-  equipments: Equipment[];
-  setEquipments: (equipments: Equipment[]) => void;
+  weapons: Equipment[];
+  setWeapons: (weapons: Equipment[]) => void;
 }
 
 const EquipmentssContext = createContext<EquipmentsContextType>({
-  equipments: [],
-  setEquipments: NIE,
+  weapons: [],
+  setWeapons: NIE,
 });
 
 export const ItemsProvider: React.FC = ({ children }) => {
-  const [equipments, setEquipments] = useState<Equipment[]>([]);
+  const [weapons, setWeapons] = useState<Equipment[]>([]);
 
   return (
     <EquipmentssContext.Provider
       value={{
-        equipments,
-        setEquipments,
+        weapons,
+        setWeapons,
       }}
     >
       {children}
@@ -27,4 +27,4 @@ export const ItemsProvider: React.FC = ({ children }) => {
   );
 };
 
-export const useEquipmentssContext = () => useContext(EquipmentssContext);
+export const useEquipmentsContext = () => useContext(EquipmentssContext);

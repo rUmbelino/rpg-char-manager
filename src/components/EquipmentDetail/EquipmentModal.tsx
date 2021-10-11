@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { Weapon } from '../../@types/D&D';
 import { Modal } from '../Modal';
+import { ActionButtonTypes } from './ActionButtons';
 import { fetchEquipmentDetail } from './controller';
-import { WeaponDetail } from './EquipmentDetail';
+import { WeaponDetail } from './WeaponDetail';
 
 interface EquipmentModalProps {
   index: string;
@@ -27,7 +28,13 @@ export const EquipmentModal: React.FC<EquipmentModalProps> = ({
           <Spinner animation="border" />
         </div>
       )}
-      {equipment && <WeaponDetail weapon={equipment as Weapon} />}
+      {equipment && (
+        <WeaponDetail
+          weapon={equipment as Weapon}
+          actionButtons={ActionButtonTypes.INVENTORY}
+          handleClose={handleClose}
+        />
+      )}
     </Modal>
   );
 };
