@@ -1,8 +1,9 @@
+import { Weapon } from '../../@types/D&D';
 import { axios } from '../../utils/axios';
 
 export const fetchEquipmentDetail = async (index: string) => {
   try {
-    const { data } = await axios.get(`/equipment/${index}`);
+    const { data } = await axios.get<Weapon>(`/equipment/${index}`);
 
     return data;
   } catch (error) {

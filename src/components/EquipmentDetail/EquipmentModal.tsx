@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
+import { Weapon } from '../../@types/D&D';
 import { Modal } from '../Modal';
 import { fetchEquipmentDetail } from './controller';
-import { EquipmentDetail } from './EquipmentDetail';
+import { WeaponDetail } from './EquipmentDetail';
 
 interface EquipmentModalProps {
   index: string;
@@ -13,7 +14,7 @@ export const EquipmentModal: React.FC<EquipmentModalProps> = ({
   index,
   handleClose,
 }) => {
-  const [equipment, setEquipment] = useState();
+  const [equipment, setEquipment] = useState<{}>();
 
   useEffect(() => {
     fetchEquipmentDetail(index).then(setEquipment);
@@ -26,7 +27,7 @@ export const EquipmentModal: React.FC<EquipmentModalProps> = ({
           <Spinner animation="border" />
         </div>
       )}
-      {equipment && <EquipmentDetail equipment={equipment} />}
+      {equipment && <WeaponDetail weapon={equipment as Weapon} />}
     </Modal>
   );
 };

@@ -1,4 +1,4 @@
-import { Equipment } from '../../@types/Item';
+import { Equipment } from '../../@types/D&D';
 import { axios } from '../../utils/axios';
 
 interface EquipmentResponse {

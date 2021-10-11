@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import { Equipment } from '../../@types/Item';
+import { Equipment } from '../../@types/D&D';
 import { NIE } from '../../utils/NIE';
 
 interface EquipmentsContextType {
