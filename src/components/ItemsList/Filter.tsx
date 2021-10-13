@@ -15,6 +15,7 @@ export const Filter: React.FC<FilterProps> = ({ value, onChange }) => {
           value={value}
           onChange={(event) => onChange(event.target.value)}
         />
+        <Form.Control.Feedback type="valid">x</Form.Control.Feedback>
       </Form.Group>
     </Form>
   );

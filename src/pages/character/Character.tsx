@@ -1,4 +1,5 @@
 import { Character } from '../../components/Character';
+import { DiceRoller } from '../../components/DiceRoller/DiceRoller';
 import { Inventory } from '../../components/Inventory';
 import { Items } from '../../components/Items';
 import { ItemsList } from '../../components/ItemsList';
@@ -12,6 +13,7 @@ export const CharacterPage = () => {
         <ItemsList />
       </div>
       <Inventory />
+      <DiceRoller />
     </>
   );
 };

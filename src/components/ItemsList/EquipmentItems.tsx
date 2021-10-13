@@ -7,11 +7,13 @@ import { ActionButtonTypes } from '../EquipmentDetail/types';
 interface ArmorListProps {
   items: Equipment[];
   fetchItems: () => void;
+  clearFilter: () => void;
 }
 
 export const EquipmentItems: React.FC<ArmorListProps> = ({
   items,
   fetchItems,
+  clearFilter,
 }) => {
   const [equipment, setEquipment] = useState<Equipment>();
 
@@ -39,7 +41,10 @@ export const EquipmentItems: React.FC<ArmorListProps> = ({
           return (
             <ListGroup.Item
               key={`equipment_item_${equipment.index}_${index}`}
-              onClick={() => setEquipment(equipment)}
+              onClick={() => {
+                clearFilter();
+                setEquipment(equipment);
+              }}
             >
               {equipment.name}
             </ListGroup.Item>

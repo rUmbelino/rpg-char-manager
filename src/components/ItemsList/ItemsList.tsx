@@ -89,6 +89,7 @@ export const ItemsList = (): JSX.Element => {
                 <EquipmentItems
                   items={filteredEquipment ? [filteredEquipment] : items}
                   fetchItems={fetchItems}
+                  clearFilter={() => setFilter('')}
                 />
               </Accordion.Body>
             </Accordion.Item>
