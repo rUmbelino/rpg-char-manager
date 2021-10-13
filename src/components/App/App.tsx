@@ -1,13 +1,15 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { combineProviders } from 'react-combine-providers';
-import { ItemsProvider } from '../hocks/Items';
+import { EquipmentsProvider } from '../hocks/Equipments';
 import { CharacterPage } from '../../pages/character';
 import { InventoryProvider } from '../hocks/Inventory';
+import { ItemsProvider } from '../hocks/Items';
 
 const providers = combineProviders();
 
-providers.push(ItemsProvider);
+providers.push(EquipmentsProvider);
 providers.push(InventoryProvider);
+providers.push(ItemsProvider);
 
 const MasterProvider = providers.master();
 

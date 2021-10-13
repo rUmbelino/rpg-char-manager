@@ -5,7 +5,7 @@ import { NIE } from '../../utils/NIE';
 interface InventoryContextType {
   equipments: Equipment[];
   addEquipmentToInventory: (eq: Equipment) => void;
-  removeEquipmentFromInventory: (id: string) => void;
+  removeEquipmentFromInventory: (eq: Equipment) => void;
 }
 
 const InventoryContext = createContext<InventoryContextType>({
@@ -21,10 +21,10 @@ export const InventoryProvider: React.FC = ({ children }) => {
     setEquipments([...equipments, equipment]);
   };
 
-  const removeEquipmentFromInventory = (index: string) => {
+  const removeEquipmentFromInventory = (equipment: Equipment) => {
     const equipmentsList = [...equipments];
     const indexOfItemToRemove = equipmentsList.findIndex(
-      (item) => item.index === index
+      (item) => item.index === equipment.index
     );
     equipmentsList.splice(indexOfItemToRemove, 1);
 

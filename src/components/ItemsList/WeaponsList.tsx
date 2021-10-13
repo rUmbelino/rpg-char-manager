@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { ListGroup } from 'react-bootstrap';
 import { Equipment } from '../../@types/D&D';
 import { EquipmentModal } from '../EquipmentDetail';
-import { ActionButtonTypes } from '../EquipmentDetail/ActionButtons';
-import { useEquipmentsContext } from '../hocks/Items';
+import { ActionButtonTypes } from '../EquipmentDetail/types';
+import { useEquipmentsContext } from '../hocks/Equipments';
 import { fetchEquipments } from './controller';
 
 export const WeaponsList = (): JSX.Element => {
@@ -26,7 +26,7 @@ export const WeaponsList = (): JSX.Element => {
         <EquipmentModal
           equipment={equipment}
           handleClose={() => setEquipment(undefined)}
-          actionButtons={ActionButtonTypes.ITENS_LIST}
+          actionButtons={ActionButtonTypes.LIST_ITEMS}
         />
       )}
       <ListGroup>

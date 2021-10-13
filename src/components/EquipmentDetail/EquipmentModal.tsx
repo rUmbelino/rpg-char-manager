@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { Equipment, Weapon } from '../../@types/D&D';
 import { Modal } from '../Modal';
-import { ActionButtonTypes } from './ActionButtons';
 import { fetchEquipmentDetail } from './controller';
-import { WeaponDetail } from './WeaponDetail';
+import { ActionButtonTypes } from './types';
+import { WeaponDetail } from './Weapons/WeaponDetail';
 
 interface EquipmentModalProps {
   equipment: Equipment;

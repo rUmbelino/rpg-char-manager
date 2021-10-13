@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { Equipment } from '../../@types/D&D';
-import { fetchEquipmentProperty } from './controller';
-import { EquipmentLine } from './EquipmentLine';
+import { Equipment } from '../../../@types/D&D';
+import { fetchEquipmentProperty } from '../controller';
+import { EquipmentLine } from '../EquipmentLine';
 
 interface WeaponPropertiesProps {
   equipments: Equipment[];

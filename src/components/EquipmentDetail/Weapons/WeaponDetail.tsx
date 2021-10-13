@@ -1,9 +1,10 @@
 import { Table } from 'react-bootstrap';
-import { Weapon } from '../../@types/D&D';
-import { getRangeDescription } from '../../utils/getRangeDescription';
-import { ActionButtons, ActionButtonTypes } from './ActionButtons';
-import { EquipmentLine } from './EquipmentLine';
+import { Weapon } from '../../../@types/D&D';
+import { getRangeDescription } from '../../../utils/getRangeDescription';
+import { WeaponsActionButtons } from './WeaponsActionButtons';
+import { EquipmentLine } from '../EquipmentLine';
 import { WeaponProperties } from './WeaponProperties';
+import { ActionButtonTypes } from '../types';
 
 interface WeaponDetailProps {
   weapon: Weapon;
@@ -86,7 +87,7 @@ export const WeaponDetail: React.FC<WeaponDetailProps> = ({
           {properties && <WeaponProperties equipments={properties} />}
         </tbody>
       </Table>
-      <ActionButtons
+      <WeaponsActionButtons
         actionButtons={actionButtons}
         handleClose={handleClose}
         equipment={equipment}

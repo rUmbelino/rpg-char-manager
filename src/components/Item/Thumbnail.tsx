@@ -1,14 +1,22 @@
 import { useState } from 'react';
 import { Equipment } from '../../@types/D&D';
 import { EquipmentModal } from '../EquipmentDetail';
-import { ActionButtonTypes } from '../EquipmentDetail/ActionButtons';
+import { ActionButtonTypes } from '../EquipmentDetail/types';
 
 interface ThumbnailProps {
-  equipment: Equipment;
+  equipment?: Equipment;
+  actionButtons: ActionButtonTypes;
 }
 
-export const Thumbnail: React.FC<ThumbnailProps> = ({ equipment }) => {
+export const Thumbnail: React.FC<ThumbnailProps> = ({
+  equipment,
+  actionButtons,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  if (!equipment) {
+    return null;
+  }
 
   return (
     <>
@@ -16,7 +24,7 @@ export const Thumbnail: React.FC<ThumbnailProps> = ({ equipment }) => {
         <EquipmentModal
           equipment={equipment}
           handleClose={() => setIsModalOpen(false)}
-          actionButtons={ActionButtonTypes.INVENTORY}
+          actionButtons={actionButtons}
         />
       )}
       <div
