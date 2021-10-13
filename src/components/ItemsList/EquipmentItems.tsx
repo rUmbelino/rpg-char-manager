@@ -3,16 +3,21 @@ import { ListGroup } from 'react-bootstrap';
 import { Equipment } from '../../@types/D&D';
 import { EquipmentModal } from '../EquipmentDetail';
 import { ActionButtonTypes } from '../EquipmentDetail/types';
-import { useEquipmentsContext } from '../hocks/Equipments';
-import { fetchEquipments } from './controller';
 
-export const WeaponsList = (): JSX.Element => {
-  const { weapons, setWeapons } = useEquipmentsContext();
+interface ArmorListProps {
+  items: Equipment[];
+  fetchItems: () => void;
+}
+
+export const EquipmentItems: React.FC<ArmorListProps> = ({
+  items,
+  fetchItems,
+}) => {
   const [equipment, setEquipment] = useState<Equipment>();
 
   const fetchEquipmentsOnLoad = useRef(() => {
-    if (weapons.length === 0) {
-      fetchEquipments(setWeapons, '/api/equipment-categories/weapon');
+    if (items.length === 0) {
+      fetchItems();
     }
   });
 
@@ -30,10 +35,10 @@ export const WeaponsList = (): JSX.Element => {
         />
       )}
       <ListGroup>
-        {weapons.map((equipment) => {
+        {items.map((equipment, index) => {
           return (
             <ListGroup.Item
-              key={`weapon_list_${equipment.name}`}
+              key={`equipment_item_${equipment.index}_${index}`}
               onClick={() => setEquipment(equipment)}
             >
               {equipment.name}
