@@ -1,9 +1,9 @@
 import { Button } from 'react-bootstrap';
-import { useInventoryContext } from '../../hocks/Inventory';
-import { useItemsContext } from '../../hocks/Items';
-import { ActionButtonsProps, ActionButtonTypes } from '../types';
+import { useInventoryContext } from '../hocks/Inventory';
+import { useItemsContext } from '../hocks/Items';
+import { ActionButtonsProps, ActionButtonTypes } from './types';
 
-export const WeaponsActionButtons: React.FC<ActionButtonsProps> = ({
+export const ActionButtons: React.FC<ActionButtonsProps> = ({
   actionButtons,
   handleClose,
   equipment,
@@ -11,11 +11,18 @@ export const WeaponsActionButtons: React.FC<ActionButtonsProps> = ({
   const { equipments, addEquipmentToInventory, removeEquipmentFromInventory } =
     useInventoryContext();
 
-  const { weapons, addToItemsWeapon, removeFromItemsWeapon } =
-    useItemsContext();
+  const {
+    items,
+    weapons,
+    addToItems,
+    removeFromItems,
+    addToItemsWeapon,
+    removeFromItemsWeapon,
+  } = useItemsContext();
 
   const isElegibleToInventory = equipments.length < 10;
   const isElegibleToWeapons = weapons.length < 2;
+  const isElegibleToItem = items.length < 4;
 
   const cancelButton = {
     description: 'Cancel',
@@ -65,7 +72,28 @@ export const WeaponsActionButtons: React.FC<ActionButtonsProps> = ({
     },
   };
 
-  const removeFromEquipedItemsToInventory = {
+  const equipOnPocketsFromItems = {
+    description: 'Equip on items',
+    variant: 'info',
+    disable: !isElegibleToItem,
+    callback: () => {
+      addToItems(equipment);
+      handleClose();
+    },
+  };
+
+  const equipOnPocketsFromInventory = {
+    description: 'Equip on items',
+    variant: 'info',
+    disable: !isElegibleToItem,
+    callback: () => {
+      addToItems(equipment);
+      removeEquipmentFromInventory(equipment);
+      handleClose();
+    },
+  };
+
+  const removeFromHandsToInventory = {
     description: 'Unequip',
     variant: 'warning',
     disable: !isElegibleToInventory,
@@ -76,7 +104,7 @@ export const WeaponsActionButtons: React.FC<ActionButtonsProps> = ({
     },
   };
 
-  const removeFromEquipedItems = {
+  const removeFromHands = {
     description: 'Throw Away',
     variant: 'danger',
     disable: false,
@@ -86,21 +114,49 @@ export const WeaponsActionButtons: React.FC<ActionButtonsProps> = ({
     },
   };
 
+  const removeFromPockets = {
+    description: 'Throw Away',
+    variant: 'danger',
+    disable: false,
+    callback: () => {
+      removeFromItems(equipment);
+      handleClose();
+    },
+  };
+
+  const removeFromPocketsToInventory = {
+    description: 'Unequip',
+    variant: 'warning',
+    disable: !isElegibleToInventory,
+    callback: () => {
+      removeFromItems(equipment);
+      addEquipmentToInventory(equipment);
+      handleClose();
+    },
+  };
+
   const buttons = {
     [ActionButtonTypes.LIST_ITEMS]: [
       cancelButton,
       addToInventory,
       equipOnHandFromItems,
+      equipOnPocketsFromItems,
     ],
     [ActionButtonTypes.INVENTORY]: [
       cancelButton,
       removeFromInventory,
       equipOnHandFromInventory,
+      equipOnPocketsFromInventory,
     ],
-    [ActionButtonTypes.EQUIPED_ITEMS]: [
+    [ActionButtonTypes.EQUIPED_ITEMS_ON_HANDS]: [
       cancelButton,
-      removeFromEquipedItemsToInventory,
-      removeFromEquipedItems,
+      removeFromHandsToInventory,
+      removeFromHands,
+    ],
+    [ActionButtonTypes.EQUIPED_ITEMS_ON_POCKETS]: [
+      cancelButton,
+      removeFromPockets,
+      removeFromPocketsToInventory,
     ],
   };
 

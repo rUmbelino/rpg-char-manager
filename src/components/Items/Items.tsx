@@ -4,7 +4,7 @@ import { Item } from '../Item';
 import { Thumbnail } from '../Item/Thumbnail';
 
 export const Items = (): JSX.Element => {
-  const { weapons } = useItemsContext();
+  const { weapons, items } = useItemsContext();
 
   return (
     <div className="d-flex align-items-center flex-column align-self-center h-100">
@@ -12,21 +12,29 @@ export const Items = (): JSX.Element => {
         <Item width="120px" height="70px">
           <Thumbnail
             equipment={weapons[0]}
-            actionButtons={ActionButtonTypes.EQUIPED_ITEMS}
+            actionButtons={ActionButtonTypes.EQUIPED_ITEMS_ON_HANDS}
           />
         </Item>
         <Item width="120px" height="70px">
           <Thumbnail
             equipment={weapons[1]}
-            actionButtons={ActionButtonTypes.EQUIPED_ITEMS}
+            actionButtons={ActionButtonTypes.EQUIPED_ITEMS_ON_HANDS}
           />
         </Item>
       </div>
-      <div className="d-flex flex-wrap align-items-center">
-        <Item width="70px" height="70px" />
-        <Item width="70px" height="70px" />
-        <Item width="70px" height="70px" />
-        <Item width="70px" height="70px" />
+      <div className="d-flex align-items-center">
+        {Array(4)
+          .fill('')
+          .map((str, index) => {
+            return (
+              <Item width="75px" height="75px" key={index}>
+                <Thumbnail
+                  equipment={items[index]}
+                  actionButtons={ActionButtonTypes.EQUIPED_ITEMS_ON_POCKETS}
+                />
+              </Item>
+            );
+          })}
       </div>
     </div>
   );

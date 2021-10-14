@@ -2,7 +2,7 @@ import { Table } from 'react-bootstrap';
 import { AdventuringGear } from '../../../@types/D&D';
 import { EquipmentLine } from '../EquipmentLine';
 import { ActionButtonTypes } from '../types';
-import { WeaponsActionButtons } from '../Weapons/WeaponsActionButtons';
+import { ActionButtons } from '../ActionButtons';
 
 interface AdventuringGearProps {
   gear: AdventuringGear;
@@ -46,7 +46,7 @@ export const AdventuringGearDetail: React.FC<AdventuringGearProps> = ({
           />
         </tbody>
       </Table>
-      <WeaponsActionButtons
+      <ActionButtons
         actionButtons={actionButtons}
         handleClose={handleClose}
         equipment={{

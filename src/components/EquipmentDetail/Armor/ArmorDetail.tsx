@@ -2,7 +2,7 @@ import { Table } from 'react-bootstrap';
 import { Armor } from '../../../@types/D&D';
 import { EquipmentLine } from '../EquipmentLine';
 import { ActionButtonTypes } from '../types';
-import { WeaponsActionButtons } from '../Weapons/WeaponsActionButtons';
+import { ActionButtons } from '../ActionButtons';
 
 interface ArmorDetailProps {
   armor: Armor;
@@ -84,7 +84,7 @@ export const ArmorDetail: React.FC<ArmorDetailProps> = ({
           {desc ? renderDescription() : renderFullArmorItems()}
         </tbody>
       </Table>
-      <WeaponsActionButtons
+      <ActionButtons
         actionButtons={actionButtons}
         handleClose={handleClose}
         equipment={{
