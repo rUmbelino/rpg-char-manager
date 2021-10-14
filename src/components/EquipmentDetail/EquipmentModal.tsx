@@ -1,10 +1,24 @@
 import { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
-import { Equipment, Weapon } from '../../@types/D&D';
+import {
+  AdventuringGear,
+  Armor,
+  Equipment,
+  EquipmentCategoryIndex,
+  Weapon,
+} from '../../@types/D&D';
 import { Modal } from '../Modal';
-import { fetchEquipmentDetail } from './controller';
+import { AdventuringGearDetail } from './AdventuringGear/AdventuringGear';
+import { ArmorDetail } from './Armor/ArmorDetail';
+import { fetchData } from './controller';
 import { ActionButtonTypes } from './types';
 import { WeaponDetail } from './Weapons/WeaponDetail';
+
+interface EquipmentWithCategory {
+  equipment_category: {
+    index: EquipmentCategoryIndex;
+  };
+}
 
 interface EquipmentModalProps {
   equipment: Equipment;
@@ -17,11 +31,24 @@ export const EquipmentModal: React.FC<EquipmentModalProps> = ({
   handleClose,
   actionButtons,
 }) => {
-  const [equipmentDetail, setEquipmentDetail] = useState<{}>();
+  const [equipmentDetail, setEquipmentDetail] =
+    useState<EquipmentWithCategory>();
 
   useEffect(() => {
-    fetchEquipmentDetail(equipment.url).then(setEquipmentDetail);
+    fetchData<EquipmentWithCategory>(equipment.url).then(setEquipmentDetail);
   }, [equipment.url]);
+
+  const hasCorrectIndex = (index: EquipmentCategoryIndex): boolean => {
+    if (!equipmentDetail) {
+      return false;
+    }
+
+    return equipmentDetail?.equipment_category?.index === index;
+  };
+
+  const isArmorDetail = hasCorrectIndex(EquipmentCategoryIndex.ARMOR);
+  const isWeaponDetail = hasCorrectIndex(EquipmentCategoryIndex.WEAPON);
+  const isGearDetail = hasCorrectIndex(EquipmentCategoryIndex.ADVENTURING_GEAR);
 
   return (
     <Modal show handleClose={handleClose}>
@@ -30,9 +57,23 @@ export const EquipmentModal: React.FC<EquipmentModalProps> = ({
           <Spinner animation="border" />
         </div>
       )}
-      {equipmentDetail && (
+      {isArmorDetail && (
+        <ArmorDetail
+          armor={equipmentDetail as Armor}
+          actionButtons={actionButtons}
+          handleClose={handleClose}
+        />
+      )}
+      {isWeaponDetail && (
         <WeaponDetail
           weapon={equipmentDetail as Weapon}
+          actionButtons={actionButtons}
+          handleClose={handleClose}
+        />
+      )}
+      {isGearDetail && (
+        <AdventuringGearDetail
+          gear={equipmentDetail as AdventuringGear}
           actionButtons={actionButtons}
           handleClose={handleClose}
         />

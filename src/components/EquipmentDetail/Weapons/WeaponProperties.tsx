@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { Equipment } from '../../../@types/D&D';
-import { fetchEquipmentProperty } from '../controller';
+import { Equipment, EquipmentProperty } from '../../../@types/D&D';
+import { fetchData } from '../controller';
 import { EquipmentLine } from '../EquipmentLine';
 
 interface WeaponPropertiesProps {
@@ -13,18 +13,18 @@ export const WeaponProperties: React.FC<WeaponPropertiesProps> = ({
   const [descriptions, setDescriptions] = useState<string[]>([]);
 
   const fetchPropertiesOnMount = useRef(() => {
-    Promise.all(equipments.map(({ url }) => fetchEquipmentProperty(url))).then(
-      (values) => {
-        const joinedDescriptions = values.map((value) => {
-          if (value?.desc) {
-            return value.desc.join();
-          }
+    Promise.all(
+      equipments.map(({ url }) => fetchData<EquipmentProperty>(url))
+    ).then((values) => {
+      const joinedDescriptions = values.map((value) => {
+        if (value?.desc) {
+          return value.desc.join();
+        }
 
-          return '';
-        });
-        setDescriptions(joinedDescriptions);
-      }
-    );
+        return '';
+      });
+      setDescriptions(joinedDescriptions);
+    });
   });
 
   useEffect(() => {

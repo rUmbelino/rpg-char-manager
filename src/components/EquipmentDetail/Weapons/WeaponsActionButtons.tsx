@@ -44,8 +44,8 @@ export const WeaponsActionButtons: React.FC<ActionButtonsProps> = ({
     },
   };
 
-  const equipFromItems = {
-    description: 'Equip',
+  const equipOnHandFromItems = {
+    description: 'Equip on hand',
     variant: 'success',
     disable: !isElegibleToWeapons,
     callback: () => {
@@ -54,8 +54,8 @@ export const WeaponsActionButtons: React.FC<ActionButtonsProps> = ({
     },
   };
 
-  const equipFromInventory = {
-    description: 'Equip',
+  const equipOnHandFromInventory = {
+    description: 'Equip on hand',
     variant: 'success',
     disable: !isElegibleToWeapons,
     callback: () => {
@@ -90,12 +90,12 @@ export const WeaponsActionButtons: React.FC<ActionButtonsProps> = ({
     [ActionButtonTypes.LIST_ITEMS]: [
       cancelButton,
       addToInventory,
-      equipFromItems,
+      equipOnHandFromItems,
     ],
     [ActionButtonTypes.INVENTORY]: [
       cancelButton,
       removeFromInventory,
-      equipFromInventory,
+      equipOnHandFromInventory,
     ],
     [ActionButtonTypes.EQUIPED_ITEMS]: [
       cancelButton,

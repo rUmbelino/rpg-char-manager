@@ -1,6 +1,6 @@
 interface EquipmentLineProps {
   name: string;
-  description: string | number;
+  description: string | number | boolean;
 }
 
 export const EquipmentLine: React.FC<EquipmentLineProps> = ({
@@ -10,7 +10,7 @@ export const EquipmentLine: React.FC<EquipmentLineProps> = ({
   return (
     <tr>
       <td>{name}</td>
-      <td>{description}</td>
+      <td>{description?.toString()}</td>
     </tr>
   );
 };

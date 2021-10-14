@@ -30,12 +30,52 @@ export const WeaponDetail: React.FC<WeaponDetailProps> = ({
     range,
     throw_range,
     url,
+    desc,
   } = weapon;
 
-  const equipment = {
-    index,
-    name,
-    url,
+  const renderDescription = () => {
+    return (
+      <EquipmentLine name="Details" description={desc?.join('. ') || ''} />
+    );
+  };
+
+  const renderFullWeaponItems = () => {
+    return (
+      <>
+        <EquipmentLine name="Range" description={category_range} />
+        <EquipmentLine
+          name="Cost"
+          description={`${cost?.quantity} ${cost?.unit}`}
+        />
+        <EquipmentLine name="Weight" description={weight} />
+        {damage && (
+          <EquipmentLine
+            name="Damage"
+            description={`${damage?.damage_dice} (${damage?.damage_type.name})`}
+          />
+        )}
+        {two_handed_damage && (
+          <EquipmentLine
+            name="Two Handed Damage"
+            description={`${two_handed_damage?.damage_dice} (${two_handed_damage?.damage_type.name})`}
+          />
+        )}
+
+        {range && (
+          <EquipmentLine
+            name="Range"
+            description={getRangeDescription(range)}
+          />
+        )}
+        {throw_range && (
+          <EquipmentLine
+            name="Thrown Range"
+            description={getRangeDescription(throw_range)}
+          />
+        )}
+        {properties && <WeaponProperties equipments={properties} />}
+      </>
+    );
   };
 
   return (
@@ -50,47 +90,22 @@ export const WeaponDetail: React.FC<WeaponDetailProps> = ({
         </thead>
         <tbody>
           <EquipmentLine name="Index" description={index} />
-          <EquipmentLine name="Range" description={category_range} />
-          <EquipmentLine
-            name="Cost"
-            description={`${cost?.quantity} ${cost?.unit}`}
-          />
-          <EquipmentLine name="Weight" description={weight} />
-          {damage && (
-            <EquipmentLine
-              name="Damage"
-              description={`${damage?.damage_dice} (${damage?.damage_type.name})`}
-            />
-          )}
-          {two_handed_damage && (
-            <EquipmentLine
-              name="Two Handed Damage"
-              description={`${two_handed_damage?.damage_dice} (${two_handed_damage?.damage_type.name})`}
-            />
-          )}
+          <EquipmentLine name="Name" description={name} />
           <EquipmentLine
             name="Category"
             description={equipment_category?.name}
           />
-          {range && (
-            <EquipmentLine
-              name="Range"
-              description={getRangeDescription(range)}
-            />
-          )}
-          {throw_range && (
-            <EquipmentLine
-              name="Thrown Range"
-              description={getRangeDescription(throw_range)}
-            />
-          )}
-          {properties && <WeaponProperties equipments={properties} />}
+          {desc ? renderDescription() : renderFullWeaponItems()}
         </tbody>
       </Table>
       <WeaponsActionButtons
         actionButtons={actionButtons}
         handleClose={handleClose}
-        equipment={equipment}
+        equipment={{
+          index,
+          name,
+          url,
+        }}
       />
     </div>
   );
