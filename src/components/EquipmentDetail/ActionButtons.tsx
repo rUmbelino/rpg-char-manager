@@ -79,7 +79,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
   };
 
   const equipOnPocketsFromItems = {
-    description: 'Equip on items',
+    description: 'Equip on pocket',
     disable: !isElegibleToItem,
     callback: () => {
       addToItems(equipment);
@@ -88,7 +88,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
   };
 
   const equipOnPocketsFromInventory = {
-    description: 'Equip on items',
+    description: 'Equip on pocket',
     disable: !isElegibleToItem,
     callback: () => {
       addToItems(equipment);
@@ -156,12 +156,12 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
 
   const groupButtons = {
     [LIST_ITEMS]: {
-      description: 'Equip',
+      description: 'Equip on Items',
       variant: 'success',
       buttons: [equipOnHandFromItems, equipOnPocketsFromItems],
     },
     [INVENTORY]: {
-      description: 'Equip',
+      description: 'Equip on Items',
       variant: 'success',
       buttons: [equipOnHandFromInventory, equipOnPocketsFromInventory],
     },
