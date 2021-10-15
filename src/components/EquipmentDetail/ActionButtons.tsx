@@ -360,7 +360,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
                 disabled={disable}
                 onClick={callback}
                 value={description}
-                className="text-light rounded-0"
+                className="text-light rounded-0 d-flex align-items-center"
               >
                 {description}
               </ToggleButton>
