@@ -5,6 +5,7 @@ export enum ActionButtonTypes {
   LIST_ITEMS,
   EQUIPED_ITEMS_ON_HANDS,
   EQUIPED_ITEMS_ON_POCKETS,
+  EQUIPED_ITEMS_ON_CHARACTER,
 }
 
 export interface ActionButtonsProps {
