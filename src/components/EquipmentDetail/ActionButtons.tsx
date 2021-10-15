@@ -64,7 +64,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
   };
 
   const removeFromInventory = {
-    description: 'Remove from inventory',
+    description: 'Throw away',
     variant: 'danger',
     disable: false,
     callback: () => {
