@@ -1,7 +1,15 @@
-import { Button } from 'react-bootstrap';
+import { ButtonGroup, Dropdown, ToggleButton } from 'react-bootstrap';
 import { useInventoryContext } from '../hocks/Inventory';
 import { useItemsContext } from '../hocks/Items';
 import { ActionButtonsProps, ActionButtonTypes } from './types';
+
+const MSG_FULL_INVENTARY = 'Your inventory is full! Get rid of something first';
+const {
+  INVENTORY,
+  LIST_ITEMS,
+  EQUIPED_ITEMS_ON_HANDS,
+  EQUIPED_ITEMS_ON_POCKETS,
+} = ActionButtonTypes;
 
 export const ActionButtons: React.FC<ActionButtonsProps> = ({
   actionButtons,
@@ -20,9 +28,9 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
     removeFromItemsWeapon,
   } = useItemsContext();
 
-  const isElegibleToInventory = equipments.length < 10;
-  const isElegibleToWeapons = weapons.length < 2;
   const isElegibleToItem = items.length < 4;
+  const isElegibleToWeapons = weapons.length < 2;
+  const isElegibleToInventory = equipments.length < 10;
 
   const cancelButton = {
     description: 'Cancel',
@@ -53,7 +61,6 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
 
   const equipOnHandFromItems = {
     description: 'Equip on hand',
-    variant: 'success',
     disable: !isElegibleToWeapons,
     callback: () => {
       addToItemsWeapon(equipment);
@@ -63,7 +70,6 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
 
   const equipOnHandFromInventory = {
     description: 'Equip on hand',
-    variant: 'success',
     disable: !isElegibleToWeapons,
     callback: () => {
       addToItemsWeapon(equipment);
@@ -74,7 +80,6 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
 
   const equipOnPocketsFromItems = {
     description: 'Equip on items',
-    variant: 'info',
     disable: !isElegibleToItem,
     callback: () => {
       addToItems(equipment);
@@ -84,7 +89,6 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
 
   const equipOnPocketsFromInventory = {
     description: 'Equip on items',
-    variant: 'info',
     disable: !isElegibleToItem,
     callback: () => {
       addToItems(equipment);
@@ -136,48 +140,94 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
   };
 
   const buttons = {
-    [ActionButtonTypes.LIST_ITEMS]: [
-      cancelButton,
-      addToInventory,
-      equipOnHandFromItems,
-      equipOnPocketsFromItems,
-    ],
-    [ActionButtonTypes.INVENTORY]: [
-      cancelButton,
-      removeFromInventory,
-      equipOnHandFromInventory,
-      equipOnPocketsFromInventory,
-    ],
-    [ActionButtonTypes.EQUIPED_ITEMS_ON_HANDS]: [
+    [LIST_ITEMS]: [cancelButton, addToInventory],
+    [INVENTORY]: [cancelButton, removeFromInventory],
+    [EQUIPED_ITEMS_ON_HANDS]: [
       cancelButton,
       removeFromHandsToInventory,
       removeFromHands,
     ],
-    [ActionButtonTypes.EQUIPED_ITEMS_ON_POCKETS]: [
+    [EQUIPED_ITEMS_ON_POCKETS]: [
       cancelButton,
       removeFromPockets,
       removeFromPocketsToInventory,
     ],
   };
 
+  const groupButtons = {
+    [LIST_ITEMS]: {
+      description: 'Equip',
+      variant: 'success',
+      buttons: [equipOnHandFromItems, equipOnPocketsFromItems],
+    },
+    [INVENTORY]: {
+      description: 'Equip',
+      variant: 'success',
+      buttons: [equipOnHandFromInventory, equipOnPocketsFromInventory],
+    },
+  };
+
+  const getSelectedButtonGroup = () => {
+    if (actionButtons === LIST_ITEMS || actionButtons === INVENTORY) {
+      return groupButtons[actionButtons];
+    }
+  };
+
   const selectedButtons = buttons[actionButtons];
+  const selectedButtonsGroup = getSelectedButtonGroup();
 
   return (
-    <div className="d-flex justify-content-between">
-      {selectedButtons?.map(
-        ({ description, variant, disable, callback }, index) => {
-          return (
-            <Button
-              key={index}
-              variant={variant}
-              disabled={disable}
-              onClick={callback}
+    <div className="d-flex">
+      <ButtonGroup style={{ flex: 1 }}>
+        {selectedButtons?.map(
+          ({ description, variant, disable, callback }, index) => {
+            return (
+              <ToggleButton
+                key={index}
+                variant={variant}
+                disabled={disable}
+                onClick={callback}
+                value={description}
+                className="text-light rounded-0"
+              >
+                {description}
+              </ToggleButton>
+            );
+          }
+        )}
+
+        {selectedButtonsGroup && (
+          <Dropdown>
+            <Dropdown.Toggle
+              className="rounded-0"
+              variant={selectedButtonsGroup.variant}
             >
-              {description}
-            </Button>
-          );
-        }
-      )}
+              {selectedButtonsGroup.description}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              {selectedButtonsGroup.buttons.map(
+                ({ callback, disable, description }) => {
+                  return (
+                    <Dropdown.Item
+                      key={`dropdown-item_${description}`}
+                      className={`${disable ? 'text-black-50' : ''}`}
+                      onClick={() => {
+                        if (disable) {
+                          return alert(MSG_FULL_INVENTARY);
+                        }
+                        callback();
+                      }}
+                    >
+                      {description}
+                    </Dropdown.Item>
+                  );
+                }
+              )}
+            </Dropdown.Menu>
+          </Dropdown>
+        )}
+      </ButtonGroup>
     </div>
   );
 };

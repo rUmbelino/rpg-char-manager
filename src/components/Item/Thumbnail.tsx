@@ -28,8 +28,9 @@ export const Thumbnail: React.FC<ThumbnailProps> = ({
         />
       )}
       <div
-        className="d-flex justify-content-center align-items-center h-100"
         onClick={() => setIsModalOpen(true)}
+        style={{ cursor: 'pointer' }}
+        className="d-flex justify-content-center align-items-center h-100"
       >
         {equipment.name}
       </div>

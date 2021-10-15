@@ -40,6 +40,7 @@ export const EquipmentItems: React.FC<ArmorListProps> = ({
         {items.map((equipment, index) => {
           return (
             <ListGroup.Item
+              style={{ cursor: 'pointer' }}
               key={`equipment_item_${equipment.index}_${index}`}
               onClick={() => {
                 clearFilter();
