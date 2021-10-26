@@ -31,7 +31,7 @@ export const Character = (): JSX.Element => {
               actionButtons={EQUIPED_ITEMS_ON_CHARACTER}
             />
           </Item>
-          <Item width="120px" height="142px">
+          <Item width="130px" height="142px">
             <Thumbnail
               equipment={legs}
               actionButtons={EQUIPED_ITEMS_ON_CHARACTER}

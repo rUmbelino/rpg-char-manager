@@ -54,7 +54,7 @@ export const EquipmentModal: React.FC<EquipmentModalProps> = ({
     <Modal show handleClose={handleClose}>
       <img
         className="d-block m-auto"
-        src={`/images/${equipment.name}.png`}
+        src={`/images/${equipment.name.toLocaleLowerCase()}.png`}
         alt={`${equipment.name} icon`}
         height="100%"
       />
