@@ -25,13 +25,13 @@ export const Character = (): JSX.Element => {
         </Item>
 
         <div className="d-flex flex-column">
-          <Item width="100px" height="142px">
+          <Item width="130px" height="142px">
             <Thumbnail
               equipment={arms}
               actionButtons={EQUIPED_ITEMS_ON_CHARACTER}
             />
           </Item>
-          <Item width="100px" height="142px">
+          <Item width="120px" height="142px">
             <Thumbnail
               equipment={legs}
               actionButtons={EQUIPED_ITEMS_ON_CHARACTER}

@@ -80,7 +80,7 @@ export const WeaponDetail: React.FC<WeaponDetailProps> = ({
 
   return (
     <div>
-      <h2 className="mb-2">{name}</h2>
+      <h2 className="mb-2 text-center">{name}</h2>
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>

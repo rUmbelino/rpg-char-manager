@@ -50,7 +50,7 @@ export const ItemsList = (): JSX.Element => {
 
   const [filter, setFilter] = useState<string>('');
   const [activeKey, setActiveKey] = useState<string>('');
-  const [filteredEquipment, setFilteredEquipment] = useState<Equipment>();
+  const [filteredEquipment, setFilteredEquipment] = useState<Equipment[]>();
 
   useEffect(() => {
     const filterByName = (equipment: Equipment) => {
@@ -65,12 +65,15 @@ export const ItemsList = (): JSX.Element => {
       return;
     }
 
-    [weapons, armor, adventuringGear].forEach((equipments, index) => {
-      const equipment = equipments.find(filterByName);
-      if (equipment) {
+    [weapons, armor, adventuringGear].every((equipments, index) => {
+      const equipment = equipments.filter(filterByName);
+      if (equipment.length) {
         setActiveKey(index.toString());
         setFilteredEquipment(equipment);
+        return false;
       }
+
+      return true;
     });
   }, [filter, adventuringGear, armor, weapons]);
 
@@ -87,7 +90,7 @@ export const ItemsList = (): JSX.Element => {
               <Accordion.Header>{title}</Accordion.Header>
               <Accordion.Body className="p-0">
                 <EquipmentItems
-                  items={filteredEquipment ? [filteredEquipment] : items}
+                  items={filteredEquipment ? filteredEquipment : items}
                   fetchItems={fetchItems}
                   clearFilter={() => setFilter('')}
                 />

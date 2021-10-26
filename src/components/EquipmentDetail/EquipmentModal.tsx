@@ -52,6 +52,12 @@ export const EquipmentModal: React.FC<EquipmentModalProps> = ({
 
   return (
     <Modal show handleClose={handleClose}>
+      <img
+        className="d-block m-auto"
+        src={`/images/${equipment.name}.png`}
+        alt={`${equipment.name} icon`}
+        height="100%"
+      />
       {!equipmentDetail && (
         <div className="text-center">
           <Spinner animation="border" />
