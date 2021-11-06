@@ -13,7 +13,7 @@ export const Modal: React.FC<AddItemModalProps> = ({
   handleClose,
 }) => {
   return (
-    <BootstrapModal show={show} onHide={handleClose}>
+    <BootstrapModal show={show} onHide={handleClose} size="lg">
       <BootstrapModal.Header closeButton>
         <BootstrapModal.Title>{title}</BootstrapModal.Title>
       </BootstrapModal.Header>

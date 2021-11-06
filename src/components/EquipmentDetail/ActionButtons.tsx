@@ -321,8 +321,6 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
           equipOnHeadFromInventory,
           equipOnChestFromInventory,
           holdFromInventory,
-          // equipOnArmsFromInventory,
-          // equipOnLegsFromInventory,
         ],
       },
     ],

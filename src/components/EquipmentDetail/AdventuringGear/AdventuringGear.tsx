@@ -20,8 +20,7 @@ export const AdventuringGearDetail: React.FC<AdventuringGearProps> = ({
 
   return (
     <div>
-      <h2 className="mb-2 text-center">{name}</h2>
-      <Table striped bordered hover variant="dark">
+      <Table striped bordered hover>
         <thead>
           <tr>
             <th>Name</th>
@@ -29,8 +28,6 @@ export const AdventuringGearDetail: React.FC<AdventuringGearProps> = ({
           </tr>
         </thead>
         <tbody>
-          <EquipmentLine name="Index" description={index} />
-          <EquipmentLine name="Name" description={name} />
           <EquipmentLine
             name="Gear Category"
             description={gear_category?.name}
