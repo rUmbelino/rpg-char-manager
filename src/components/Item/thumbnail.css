@@ -1,0 +1,8 @@
+.show-p-on-hover p {
+  opacity: 0;
+  transition: all 0.3s linear;
+}
+
+.show-p-on-hover:hover p {
+  opacity: 1;
+}

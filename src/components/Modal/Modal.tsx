@@ -17,7 +17,7 @@ export const Modal: React.FC<AddItemModalProps> = ({
       <BootstrapModal.Header closeButton>
         <BootstrapModal.Title>{title}</BootstrapModal.Title>
       </BootstrapModal.Header>
-      <BootstrapModal.Body>{children}</BootstrapModal.Body>
+      <BootstrapModal.Body className="pt-0">{children}</BootstrapModal.Body>
     </BootstrapModal>
   );
 };

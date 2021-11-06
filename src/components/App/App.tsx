@@ -17,7 +17,7 @@ const MasterProvider = providers.master();
 
 function App() {
   return (
-    <div className="App container">
+    <div className="App container" style={{ marginTop: '100px' }}>
       <MasterProvider>
         <CharacterPage />
       </MasterProvider>

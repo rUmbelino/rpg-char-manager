@@ -25,7 +25,6 @@ export const WeaponDetail: React.FC<WeaponDetailProps> = ({
     cost,
     damage,
     two_handed_damage,
-    equipment_category,
     properties,
     range,
     throw_range,
@@ -39,6 +38,13 @@ export const WeaponDetail: React.FC<WeaponDetailProps> = ({
     );
   };
 
+  const renderDamage = () => {
+    const oneHand = `${damage?.damage_dice} (${damage?.damage_type.name})`;
+    const twoHand = `/ ${two_handed_damage?.damage_dice} (${two_handed_damage?.damage_type.name})`;
+
+    return `${oneHand} ${twoHand}`;
+  };
+
   const renderFullWeaponItems = () => {
     return (
       <>
@@ -48,18 +54,7 @@ export const WeaponDetail: React.FC<WeaponDetailProps> = ({
           description={`${cost?.quantity} ${cost?.unit}`}
         />
         <EquipmentLine name="Weight" description={weight} />
-        {damage && (
-          <EquipmentLine
-            name="Damage"
-            description={`${damage?.damage_dice} (${damage?.damage_type.name})`}
-          />
-        )}
-        {two_handed_damage && (
-          <EquipmentLine
-            name="Two Handed Damage"
-            description={`${two_handed_damage?.damage_dice} (${two_handed_damage?.damage_type.name})`}
-          />
-        )}
+        {damage && <EquipmentLine name="Damage" description={renderDamage()} />}
 
         {range && (
           <EquipmentLine
@@ -69,35 +64,26 @@ export const WeaponDetail: React.FC<WeaponDetailProps> = ({
         )}
         {throw_range && (
           <EquipmentLine
-            name="Thrown Range"
+            name="Thrown"
             description={getRangeDescription(throw_range)}
           />
         )}
-        {properties && <WeaponProperties equipments={properties} />}
       </>
     );
   };
 
   return (
     <div>
-      <h2 className="mb-2 text-center">{name}</h2>
-      <Table striped bordered hover variant="dark">
+      <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Name</th>
+            <th style={{ width: '70px' }}>Name</th>
             <th>Description</th>
           </tr>
         </thead>
-        <tbody>
-          <EquipmentLine name="Index" description={index} />
-          <EquipmentLine name="Name" description={name} />
-          <EquipmentLine
-            name="Category"
-            description={equipment_category?.name}
-          />
-          {desc ? renderDescription() : renderFullWeaponItems()}
-        </tbody>
+        <tbody>{desc ? renderDescription() : renderFullWeaponItems()}</tbody>
       </Table>
+      {properties && <WeaponProperties equipments={properties} />}
       <ActionButtons
         actionButtons={actionButtons}
         handleClose={handleClose}

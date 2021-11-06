@@ -18,6 +18,7 @@ interface EquipmentWithCategory {
   equipment_category: {
     index: EquipmentCategoryIndex;
   };
+  name: string;
 }
 
 interface EquipmentModalProps {
@@ -51,7 +52,7 @@ export const EquipmentModal: React.FC<EquipmentModalProps> = ({
   const isGearDetail = hasCorrectIndex(EquipmentCategoryIndex.ADVENTURING_GEAR);
 
   return (
-    <Modal show handleClose={handleClose}>
+    <Modal show handleClose={handleClose} title={equipmentDetail?.name}>
       <img
         className="d-block m-auto"
         src={`/images/${equipment.name.toLocaleLowerCase()}.png`}

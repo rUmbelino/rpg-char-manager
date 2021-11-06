@@ -477,7 +477,7 @@
     shading: THREE.FlatShading,
   };
   this.label_color = '#aaaaaa';
-  this.dice_color = '#202020';
+  this.dice_color = '#7a0505';
   this.ambient_light_color = 0xf0f5fb;
   this.spot_light_color = 0xefdfd5;
   this.selector_back_colors = {

@@ -11,7 +11,7 @@ export const ItemsList = (): JSX.Element => {
     border: '1px solid black',
     margin: '0.5rem 0',
     width: '250px',
-    maxHeight: '500px',
+    height: '454px',
     overflow: 'scroll',
   };
 

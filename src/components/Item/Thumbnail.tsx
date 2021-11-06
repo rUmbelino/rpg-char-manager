@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Equipment } from '../../@types/D&D';
 import { EquipmentModal } from '../EquipmentDetail';
 import { ActionButtonTypes } from '../EquipmentDetail/types';
+import './thumbnail.css';
 
 interface ThumbnailProps {
   equipment?: Equipment;
@@ -32,14 +33,14 @@ export const Thumbnail: React.FC<ThumbnailProps> = ({
       <div
         onClick={() => setIsModalOpen(true)}
         style={{ cursor: 'pointer' }}
-        className="d-flex justify-content-center align-items-center position-relative h-100 overflow-hidden"
+        className="d-flex justify-content-center align-items-center position-relative h-100 overflow-hidden show-p-on-hover"
       >
         <img
-          height="100%"
+          height="120%"
           alt={`${name} icon`}
           src={`/images/${name.toLocaleLowerCase()}.png`}
         />
-        <p className="position-absolute" style={{ bottom: 0 }}>
+        <p className="position-absolute" style={{ bottom: '-10px' }}>
           {name}
         </p>
       </div>

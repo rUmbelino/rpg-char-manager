@@ -36,15 +36,15 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
     setHeadEquipment,
     chest,
     setChestEquipment,
-    arms,
-    setArmsEquipment,
-    legs,
-    setLegsEquipment,
+    holding,
+    addHoldingEquipment,
+    removeHoldingEquipment,
   } = useCharacterContext();
 
   const isElegibleToItem = items.length < 4;
   const isElegibleToWeapons = weapons.length < 2;
   const isElegibleToInventory = equipments.length < 10;
+  const isEligibleToHold = holding.length < 4;
 
   const cancelButton = {
     description: 'Cancel',
@@ -181,6 +181,15 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
     },
   };
 
+  const holdFromItems = {
+    description: 'Grab',
+    disable: !isEligibleToHold,
+    callback: () => {
+      addHoldingEquipment(equipment);
+      handleClose();
+    },
+  };
+
   const equipOnChestFromInventory = {
     description: 'Equip on cheast',
     disable: Boolean(chest),
@@ -191,39 +200,11 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
     },
   };
 
-  const equipOnArmsFromItems = {
-    description: 'Equip on arms',
-    disable: Boolean(arms),
+  const holdFromInventory = {
+    description: 'Grab',
+    disable: !isEligibleToHold,
     callback: () => {
-      setArmsEquipment(equipment);
-      handleClose();
-    },
-  };
-
-  const equipOnArmsFromInventory = {
-    description: 'Equip on arms',
-    disable: Boolean(arms),
-    callback: () => {
-      setArmsEquipment(equipment);
-      removeEquipmentFromInventory(equipment);
-      handleClose();
-    },
-  };
-
-  const equipOnLegsFromItems = {
-    description: 'Equip on legs',
-    disable: Boolean(legs),
-    callback: () => {
-      setLegsEquipment(equipment);
-      handleClose();
-    },
-  };
-
-  const equipOnLegsFromInventory = {
-    description: 'Equip on legs',
-    disable: Boolean(legs),
-    callback: () => {
-      setLegsEquipment(equipment);
+      addHoldingEquipment(equipment);
       removeEquipmentFromInventory(equipment);
       handleClose();
     },
@@ -234,11 +215,17 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
     variant: 'danger',
     disable: false,
     callback: () => {
+      const holdingActions = holding.map((item) => [
+        item,
+        () => {
+          removeHoldingEquipment(item);
+        },
+      ]);
+
       const characterActions = [
         [head, setHeadEquipment],
         [chest, setChestEquipment],
-        [arms, setArmsEquipment],
-        [legs, setLegsEquipment],
+        ...holdingActions,
       ];
 
       characterActions.some((tuple: any) => {
@@ -260,11 +247,17 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
     variant: 'warning',
     disable: !isElegibleToInventory,
     callback: () => {
+      const holdingActions = holding.map((item) => [
+        item,
+        () => {
+          removeHoldingEquipment(item);
+        },
+      ]);
+
       const characterActions = [
         [head, setHeadEquipment],
         [chest, setChestEquipment],
-        [arms, setArmsEquipment],
-        [legs, setLegsEquipment],
+        ...holdingActions,
       ];
 
       characterActions.some((tuple: any) => {
@@ -312,12 +305,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
       {
         description: 'Equip on Character',
         variant: 'info',
-        buttons: [
-          equipOnHeadFromItems,
-          equipOnChestFromItems,
-          equipOnArmsFromItems,
-          equipOnLegsFromItems,
-        ],
+        buttons: [equipOnHeadFromItems, equipOnChestFromItems, holdFromItems],
       },
     ],
     [INVENTORY]: [
@@ -332,8 +320,9 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
         buttons: [
           equipOnHeadFromInventory,
           equipOnChestFromInventory,
-          equipOnArmsFromInventory,
-          equipOnLegsFromInventory,
+          holdFromInventory,
+          // equipOnArmsFromInventory,
+          // equipOnLegsFromInventory,
         ],
       },
     ],

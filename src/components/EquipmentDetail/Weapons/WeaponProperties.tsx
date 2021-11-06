@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
+import { Accordion } from 'react-bootstrap';
 import { Equipment, EquipmentProperty } from '../../../@types/D&D';
 import { fetchData } from '../controller';
-import { EquipmentLine } from '../EquipmentLine';
 
 interface WeaponPropertiesProps {
   equipments: Equipment[];
@@ -36,16 +36,20 @@ export const WeaponProperties: React.FC<WeaponPropertiesProps> = ({
   }
 
   return (
-    <>
-      {equipments.map(({ name, index }, i) => {
-        return (
-          <EquipmentLine
-            key={index}
-            name={name}
-            description={descriptions[i]}
-          />
-        );
-      })}
-    </>
+    <Accordion className="mb-3">
+      <Accordion.Item eventKey="0">
+        <Accordion.Header>Properties</Accordion.Header>
+        <Accordion.Body>
+          {equipments.map(({ name, index }, i) => {
+            return (
+              <div key={`prop_${index}`}>
+                <strong>{name}:</strong>
+                <p>{descriptions[i]?.toString()}</p>
+              </div>
+            );
+          })}
+        </Accordion.Body>
+      </Accordion.Item>
+    </Accordion>
   );
 };

@@ -8,14 +8,14 @@ export const Items = (): JSX.Element => {
 
   return (
     <div className="d-flex align-items-center flex-column align-self-center h-100">
-      <div className="d-flex align-items-center">
-        <Item width="120px" height="70px">
+      <div className="d-flex align-items-center" style={{ marginTop: '95px' }}>
+        <Item width={200}>
           <Thumbnail
             equipment={weapons[0]}
             actionButtons={ActionButtonTypes.EQUIPED_ITEMS_ON_HANDS}
           />
         </Item>
-        <Item width="120px" height="70px">
+        <Item width={200}>
           <Thumbnail
             equipment={weapons[1]}
             actionButtons={ActionButtonTypes.EQUIPED_ITEMS_ON_HANDS}
@@ -27,7 +27,7 @@ export const Items = (): JSX.Element => {
           .fill('')
           .map((str, index) => {
             return (
-              <Item width="75px" height="75px" key={index}>
+              <Item width={92} key={index}>
                 <Thumbnail
                   equipment={items[index]}
                   actionButtons={ActionButtonTypes.EQUIPED_ITEMS_ON_POCKETS}

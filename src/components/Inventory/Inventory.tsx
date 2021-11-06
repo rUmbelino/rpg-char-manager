@@ -7,7 +7,10 @@ export const Inventory = () => {
   const { equipments } = useInventoryContext();
 
   return (
-    <div className="d-flex flex-wrap w-100 border border-dark">
+    <div
+      className="d-flex flex-wrap w-100 border border-dark"
+      style={{ marginTop: '30px' }}
+    >
       {Array(10)
         .fill('')
         .map((curr, index) => {
@@ -16,7 +19,7 @@ export const Inventory = () => {
           return (
             <Item
               key={`inventory_item_${index}`}
-              height="80px"
+              width={200}
               style={{ flex: '1 0 calc(20% - 20px)' }}
             >
               {equipment && (

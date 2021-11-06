@@ -7,36 +7,48 @@ interface CharacterContextType {
   setHeadEquipment: (equipment?: Equipment) => void;
   chest?: Equipment;
   setChestEquipment: (equipment?: Equipment) => void;
-  arms?: Equipment;
-  setArmsEquipment: (equipment?: Equipment) => void;
-  legs?: Equipment;
-  setLegsEquipment: (equipment?: Equipment) => void;
+  holding: Equipment[];
+  addHoldingEquipment: (equipment: Equipment) => void;
+  removeHoldingEquipment: (equipment: Equipment) => void;
 }
 
 const CharacterContext = createContext<CharacterContextType>({
-  setArmsEquipment: NIE,
+  holding: [],
   setChestEquipment: NIE,
   setHeadEquipment: NIE,
-  setLegsEquipment: NIE,
+  addHoldingEquipment: NIE,
+  removeHoldingEquipment: NIE,
 });
 
 export const CharacterProvider: React.FC = ({ children }) => {
   const [head, setHeadEquipment] = useState<Equipment>();
-  const [arms, setArmsEquipment] = useState<Equipment>();
-  const [legs, setLegsEquipment] = useState<Equipment>();
   const [chest, setChestEquipment] = useState<Equipment>();
+  const [holding, setHoldingEquipment] = useState<Equipment[]>([]);
+
+  const addHoldingEquipment = (equipment: Equipment) => {
+    setHoldingEquipment([...holding, equipment]);
+  };
+
+  const removeHoldingEquipment = (equipment: Equipment) => {
+    const holdingList = [...holding];
+    const indexOfItemToRemove = holdingList.findIndex(
+      ({ index }) => index === equipment.index
+    );
+
+    holdingList.splice(indexOfItemToRemove, 1);
+    setHoldingEquipment(holdingList);
+  };
 
   return (
     <CharacterContext.Provider
       value={{
         head,
         setHeadEquipment,
-        arms,
-        setArmsEquipment,
-        legs,
-        setLegsEquipment,
         chest,
         setChestEquipment,
+        holding,
+        addHoldingEquipment,
+        removeHoldingEquipment,
       }}
     >
       {children}
