@@ -46,13 +46,6 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
   const isElegibleToInventory = equipments.length < 10;
   const isEligibleToHold = holding.length < 4;
 
-  const cancelButton = {
-    description: 'Cancel',
-    variant: 'secondary',
-    callback: handleClose,
-    disable: false,
-  };
-
   const addToInventory = {
     description: 'Add to inventory',
     variant: 'primary',
@@ -276,20 +269,14 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
   };
 
   const buttons = {
-    [LIST_ITEMS]: [cancelButton, addToInventory],
-    [INVENTORY]: [cancelButton, removeFromInventory],
-    [EQUIPED_ITEMS_ON_HANDS]: [
-      cancelButton,
-      removeFromHandsToInventory,
-      removeFromHands,
-    ],
+    [LIST_ITEMS]: [addToInventory],
+    [INVENTORY]: [removeFromInventory],
+    [EQUIPED_ITEMS_ON_HANDS]: [removeFromHandsToInventory, removeFromHands],
     [EQUIPED_ITEMS_ON_POCKETS]: [
-      cancelButton,
       removeFromPockets,
       removeFromPocketsToInventory,
     ],
     [EQUIPED_ITEMS_ON_CHARACTER]: [
-      cancelButton,
       removeFromCharacter,
       removeFromCharacterToInventory,
     ],

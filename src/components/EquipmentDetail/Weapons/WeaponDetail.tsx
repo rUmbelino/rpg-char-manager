@@ -40,7 +40,10 @@ export const WeaponDetail: React.FC<WeaponDetailProps> = ({
 
   const renderDamage = () => {
     const oneHand = `${damage?.damage_dice} (${damage?.damage_type.name})`;
-    const twoHand = `/ ${two_handed_damage?.damage_dice} (${two_handed_damage?.damage_type.name})`;
+    let twoHand = '';
+    if (two_handed_damage?.damage_dice) {
+      twoHand = `/ ${two_handed_damage?.damage_dice} (${two_handed_damage?.damage_type.name})`;
+    }
 
     return `${oneHand} ${twoHand}`;
   };

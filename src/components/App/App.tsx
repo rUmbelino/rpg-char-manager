@@ -1,4 +1,4 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import '../../utils/bootstrap.scss';
 import { combineProviders } from 'react-combine-providers';
 import { EquipmentsProvider } from '../hocks/Equipments';
 import { InventoryProvider } from '../hocks/Inventory';

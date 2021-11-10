@@ -53,38 +53,43 @@ export const EquipmentModal: React.FC<EquipmentModalProps> = ({
 
   return (
     <Modal show handleClose={handleClose} title={equipmentDetail?.name}>
-      <img
-        className="d-block m-auto"
-        src={`/images/${equipment.name.toLocaleLowerCase()}.png`}
-        alt={`${equipment.name} icon`}
-        height="100%"
-      />
-      {!equipmentDetail && (
-        <div className="text-center">
-          <Spinner animation="border" />
+      <div className="d-flex py-3">
+        <div>
+          <img
+            className="d-block m-auto"
+            alt={`${equipment.name} icon`}
+            src={`/images/${equipment.name.toLocaleLowerCase()}.png`}
+          />
         </div>
-      )}
-      {isArmorDetail && (
-        <ArmorDetail
-          armor={equipmentDetail as Armor}
-          actionButtons={actionButtons}
-          handleClose={handleClose}
-        />
-      )}
-      {isWeaponDetail && (
-        <WeaponDetail
-          weapon={equipmentDetail as Weapon}
-          actionButtons={actionButtons}
-          handleClose={handleClose}
-        />
-      )}
-      {isGearDetail && (
-        <AdventuringGearDetail
-          gear={equipmentDetail as AdventuringGear}
-          actionButtons={actionButtons}
-          handleClose={handleClose}
-        />
-      )}
+        <div>
+          {!equipmentDetail && (
+            <div className="text-center">
+              <Spinner animation="border" />
+            </div>
+          )}
+          {isArmorDetail && (
+            <ArmorDetail
+              armor={equipmentDetail as Armor}
+              actionButtons={actionButtons}
+              handleClose={handleClose}
+            />
+          )}
+          {isWeaponDetail && (
+            <WeaponDetail
+              weapon={equipmentDetail as Weapon}
+              actionButtons={actionButtons}
+              handleClose={handleClose}
+            />
+          )}
+          {isGearDetail && (
+            <AdventuringGearDetail
+              gear={equipmentDetail as AdventuringGear}
+              actionButtons={actionButtons}
+              handleClose={handleClose}
+            />
+          )}
+        </div>
+      </div>
     </Modal>
   );
 };
