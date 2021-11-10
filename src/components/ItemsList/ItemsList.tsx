@@ -8,11 +8,10 @@ import { Filter } from './Filter';
 
 export const ItemsList = (): JSX.Element => {
   const style = {
-    border: '1px solid black',
     margin: '0.5rem 0',
     width: '250px',
     height: '454px',
-    overflow: 'scroll',
+    overflow: 'auto',
   };
 
   const {

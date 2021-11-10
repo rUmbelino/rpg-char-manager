@@ -61,7 +61,7 @@ export const EquipmentModal: React.FC<EquipmentModalProps> = ({
             src={`/images/${equipment.name.toLocaleLowerCase()}.png`}
           />
         </div>
-        <div>
+        <div style={{ flexGrow: 2 }}>
           {!equipmentDetail && (
             <div className="text-center">
               <Spinner animation="border" />
