@@ -36,7 +36,7 @@ export const Thumbnail: React.FC<ThumbnailProps> = ({
         className="d-flex justify-content-center align-items-center position-relative h-100 overflow-hidden show-p-on-hover"
       >
         <img
-          height="120%"
+          height="130%"
           alt={`${name} icon`}
           src={`/images/${name.toLocaleLowerCase()}.png`}
         />

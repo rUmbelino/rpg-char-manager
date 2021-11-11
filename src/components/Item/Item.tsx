@@ -18,7 +18,7 @@ export const Item: React.FC<ItemProps> = ({
     margin: '0.5rem',
     width: `${width}px`,
     height: divHeight,
-    border: '10px solid transparent',
+    border: '20px solid transparent',
     borderImage: 'url(images/border.png) 30% round',
     ...style,
   };
